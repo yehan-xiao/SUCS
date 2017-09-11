@@ -1,0 +1,76 @@
+<!--Written by Shitao Tang-->
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link type="text/css" rel="stylesheet" href="css/styleSheet.css" />
+</head>
+
+<body>
+
+	<div id="overlay-back"></div>
+	<div id="function_buttons">
+		<div id="title">Baidu Map</div>
+
+		<button id="normal" class="function_button" onclick="normal()" style="background-color:#ccc">Normal</button>
+		<button id="rect" class="function_button" onclick="draw_rect()">Rect</button>
+		<button id="point" class="function_button" onclick="search_coordinate()">Point</button>
+		<button class="function_button" onclick="map.clearOverlays()">Clear</button>
+	</div>
+
+
+	<div id="container"></div>
+	<div id="task">
+		<table id="all_images">
+			<tr>
+				<th>longitude</th>
+				<th>latitude</th>
+			</tr>
+		</table>
+		<button id="download_button" onclick="download()">Download</button>
+	</div>
+
+
+	<div id='searching_window'>
+		<button id="close_button" onclick="close_searching_window()">X</button> <br/>
+		<button id="search_bounding_box" onclick="search_bounding_box()">Search images</button><br/>
+		<input id="image_analysis" type="button" value="Image analysis" onclick="image_analysis()" disabled />
+		<select id="object">
+  			<option value="manhole">manhole</option>
+		</select>
+		<button id="search_by_name">Search places</button><input id="placename" type="text" name="firstname" placeholder="Place name ..."><br/>
+		<br/><br/>
+	</div>
+
+	<div id='image_window'>
+		<button id="close_button" onclick="close_image_window()">X</button><br/>
+		<canvas id="image" width="1000px" height="500px" style="top:0px"></canvas><br/>
+		<button onclick="add_to_zip()" class="function_button">Accept</button>
+		<button id="reject" class="function_button">Reject</button>
+	</div>
+
+	<div class="modal">
+		<!-- Place at bottom of page -->
+	</div>
+	<div class="progress" style="text-align:center;vertical-align:middle;">
+		<div id="percent" style="position:absolute;top:50%;left:50%;font-size:20px;">0%</div>
+	</div>
+
+	<script src="zip.js"></script>
+	<script src="z-worker.js"></script>
+	<script src="deflate.js"></script>
+	<script src="inflate.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?ak=CkMdH2rDm1ypzW7ODG7hU6rGAXRr4nYb&v=2.0&services=false"></script>
+	<script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="baidu.js"></script>
+	<script type="text/javascript">
+		map.centerAndZoom("宁波", 17);
+		map.enableScrollWheelZoom(true);
+		change_map_engine(1);
+        normal();
+	</script>
+
+</body>
+
+</html>

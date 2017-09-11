@@ -1,0 +1,183 @@
+<!--Written by Benjamin John Pemberton Morse-->
+<!DOCTYPE html>
+<html>
+    <head> 
+ 		<!--<link type="text/css" rel="stylesheet" href="styleSheet.css"/>	-->
+       <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+	    <title>UCS Login</title> 
+		<link rel="shortcut icon" href="favicon.ico" />
+		<style type="text/css">
+			#content{
+				width: 380px;
+    			height:560px;
+				font-family: Roboto,Arial,sans-serif;
+			    color: #020004;
+			    font-weight: 400;
+			    font-size: 1rem;
+			    line-height: 1.625rem;
+			    font-size: 16px;
+			    margin-right:auto;
+			    margin-left:auto;
+
+			}
+			#loginSpace {
+			    width: 100%;
+				height: 40px;
+			    margin-right:auto;
+			    margin-left:auto;
+			}
+			#logo{
+				width: 240px;
+   				margin-right:auto;
+			    margin-left:auto;
+			}
+			#welcome{
+
+				width: 313px;
+				font-size: 28px;
+   				margin-right:auto;
+			    margin-left:auto;
+			    margin-top: 50px;
+			    margin-bottom: 0px;
+
+			}
+			#user_submit{
+		    	width: 369px;
+		    	height: 50px;
+		    	background: #009FE3;
+		    	color:white;
+		    	font-weight: 400;
+		    	font-size: 16px;
+		    	border:0;    
+        		outline: none;
+        		border-radius:2px;
+        		cursor: pointer;
+        		margin-right:auto;
+			    margin-left:auto;
+			    margin-top: 35px;
+			}
+			#loginBox{
+				margin-top: 20px;
+				font-size: 12px;
+				color:#009FE3;
+
+			}
+			.form1{
+		   
+
+			}
+			input.form1[type=text],[type=password] {
+			    width: 350px;
+			    color: black;
+			    font-size: 17px;
+			    padding: 5px 10px;
+			    border: none;
+			    border-bottom: 1px solid  #DAE1E6;
+			    
+			}
+			input[type=text].form1:focus,[type=password].form1:focus {
+			    border-bottom: 1px solid #009FE3;
+			}
+			input[type=text].form1:hover,[type=password].form1:hover {
+			    border-bottom: 1px solid #009FE3;
+			}
+
+			.form1::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+			    color:    #DAE1E6;
+			    opacity:  1;
+			}
+			.form1:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+			   color:    #DAE1E6;
+			   opacity:  1;
+			}
+			.form1::-moz-placeholder { /* Mozilla Firefox 19+ */
+			   color:    #DAE1E6;
+				opacity:  1;
+			}
+			.form1:-ms-input-placeholder{ /* Internet Explorer 10-11 */
+			   color:    #DAE1E6;
+			   opacity:  1;
+			}
+			#pLogin, #pLogin2{
+				color: white;
+			}
+
+		</style>
+    </head>
+
+<body> 
+<div id="content">
+<div id="loginSpace">
+</div>
+
+	<div id="logo">
+	
+		<img src="images/logo.png" width="240" onclick="location.href='login.html';" style="cursor: pointer;">
+	</div>
+	<p id="welcome">
+		Welcome, please sign in.
+	</p>
+	<div id="loginBox">
+				
+			<p id="pLogin">Username</p> 
+			<input placeholder="Username" type="text"  name="user_login" class="form1" id="user_name"  onfocus="displayText()" onfocusout="hideText()"//>
+			
+			<p id="pLogin2">Password</p> 
+			<input placeholder="Password" type="password" name="password_login" class="form1" id="user_password" onfocus="displayText2()" onfocusout="hideText2()"//>
+			
+			<!--<input type="submit" name="button" id="loginButton" value="Login" />-->
+			<input type="button" id="user_submit" name="submit" value="Login" />			
+
+	</div><!-- loginBox-->
+</div><!-- content -->
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <script src="main.js"></script>
+    <script language="javascript">
+    	function displayText() {
+		    document.getElementById("pLogin").style.color = "#009FE3";
+		}
+		function hideText() {
+			document.getElementById("pLogin").style.color = "white";
+		}
+		function displayText2() {
+		    document.getElementById("pLogin2").style.color = "#009FE3";
+
+		}
+		function hideText2() {
+		    document.getElementById("pLogin2").style.color = "white";
+		}
+
+        jQuery(document).ready(function () {
+
+            jQuery("#user_submit").click(function () {
+                var user_name = jQuery("#user_name").val();
+                var user_password = jQuery("#user_password").val();
+                //alert(user_name);
+                //alert(user_password);
+                
+                jQuery.ajax({
+
+                    type: "POST",
+                    url: server_url,
+                    data: JSON.stringify({
+                        "command": "login",
+                        'username': user_name,
+                        'password': user_password
+                    }),
+                    success: function (data) {
+                        setCookie('token',data,1)
+                        //alert("Log in successfully");                        
+                        window.location.replace('index.html');
+                        
+                    },
+                    error: function (x) {
+                        alert("Wrong user name and password");
+                    },
+                    dataType: 'json'
+
+                });
+            })
+        })
+    </script>
+</body>
+</html>
