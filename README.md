@@ -134,7 +134,7 @@ The main server and the image analysis server can be arranged in one server or t
  	password: root
 
 ## User Guide
-**See [User Guide](https://gitlab.com/mrpike/SUCS/wikis/general/user_guide) to learn how to use SUCS.**
+**See [User Guide](https://github.com/yehan-xiao/SUCS-wiki/blob/master/general/user_guide.md) to learn how to use SUCS.**
 
 ## License
 
